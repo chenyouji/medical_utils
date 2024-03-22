@@ -1,4 +1,4 @@
-module medical_utils
+module github.com/chenyouji/medical_utils
 
 go 1.20
 
