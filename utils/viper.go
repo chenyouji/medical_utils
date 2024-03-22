@@ -8,9 +8,9 @@ var config struct {
 	Nacos Nacos
 }
 
-func InitViper() {
+func InitViper(filepath string) {
 	v := viper.New()
-	v.SetConfigFile("./etc/goods.yaml")
+	v.SetConfigFile(filepath)
 	err := v.ReadInConfig()
 	if err != nil {
 		panic(err)
