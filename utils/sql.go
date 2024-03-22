@@ -40,6 +40,7 @@ type MedicalUser struct {
 	Mobile   string `gorm:"char(11);not null;comment:手机号"`
 	Age      int32  `gorm:"tinyint(3);not null;comment:年龄"`
 	Sex      int32  `gorm:"tinyint(1);not null;comment:性别（1为男性，0为女性）"`
+	Image    string `gorm:"varchar(200);not null;comment:头像"`
 }
 
 func (MedicalUser) TableName() string {
@@ -80,6 +81,7 @@ type MedicalDoctor struct {
 	Detail     string `gorm:"varchar(50);not null;comment:描述"`
 	Title      string `gorm:"varchar(10);not null;comment:职称"`
 	Mobile     string `gorm:"char(11);not null;comment:手机号"`
+	Image      string `gorm:"varchar(200);not null;comment:头像"`
 }
 
 func (MedicalDoctor) TableName() string {
@@ -88,13 +90,14 @@ func (MedicalDoctor) TableName() string {
 
 type MedicalDrugs struct {
 	gorm.Model
-	Name           string `gorm:"varchar(20);not null;comment:药名"`
-	Detail         string `gorm:"varchar(150);not null;comment:药品描述"`
-	DrugType       int32  `gorm:"tinyint(1);not null;comment:药品类型(1，西药，2，中药)"`
-	IsPrescription int32  `gorm:"tinyint(1);not null;comment:是否是处方药(1为RX,2为OTC)"`
-	InsDrugs       int32  `gorm:"tinyint(1);not null;comment:是否是医保药(1为是,0为否)"`
-	Dosage         string `gorm:"varchar(50);not null;comment:用药指导"`
-	Taboo          string `gorm:"varchar(50);not null;comment:饮食禁忌"`
+	Name           string  `gorm:"varchar(20);not null;comment:药名"`
+	Detail         string  `gorm:"varchar(150);not null;comment:药品描述"`
+	DrugType       int32   `gorm:"tinyint(1);not null;comment:药品类型(1，西药，2，中药)"`
+	IsPrescription int32   `gorm:"tinyint(1);not null;comment:是否是处方药(1为RX,2为OTC)"`
+	InsDrugs       int32   `gorm:"tinyint(1);not null;comment:是否是医保药(1为是,0为否)"`
+	Dosage         string  `gorm:"varchar(50);not null;comment:用药指导"`
+	Taboo          string  `gorm:"varchar(50);not null;comment:饮食禁忌"`
+	Price          float32 `gorm:"decimal(10,2);not null;comment:药品价格"`
 }
 
 func (MedicalDrugs) TableName() string {
