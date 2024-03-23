@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a40270a3-6f67-4d55-96a3-5021e4479535" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/oss.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/sql.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +51,7 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/25798/go/src/medical_utils",
+    "last_opened_file_path": "C:/Users/25798/go/src/youku/oss_api/utils/aliyun_oss.go",
     "settings.editor.selected.configurable": "go.vgo"
   }
 }]]></component>

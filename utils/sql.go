@@ -40,7 +40,7 @@ type MedicalUser struct {
 	Mobile   string `gorm:"char(11);not null;comment:手机号"`
 	Age      int32  `gorm:"tinyint(3);not null;comment:年龄"`
 	Sex      int32  `gorm:"tinyint(1);not null;comment:性别（1为男性，0为女性）"`
-	Image    string `gorm:"varchar(200);not null;comment:头像"`
+	Image    string `gorm:"varchar(200);comment:头像"`
 }
 
 func (MedicalUser) TableName() string {
@@ -81,13 +81,15 @@ type MedicalDoctor struct {
 	Detail     string `gorm:"varchar(50);not null;comment:描述"`
 	Title      string `gorm:"varchar(10);not null;comment:职称"`
 	Mobile     string `gorm:"char(11);not null;comment:手机号"`
-	Image      string `gorm:"varchar(200);not null;comment:头像"`
+	Image      string `gorm:"varchar(200);comment:头像"`
 }
 
 func (MedicalDoctor) TableName() string {
 	return "medical_doctor"
 }
 
+type MedicalDoctorDepartment struct {
+}
 type MedicalDrugs struct {
 	gorm.Model
 	Name           string  `gorm:"varchar(20);not null;comment:药名"`
@@ -98,6 +100,7 @@ type MedicalDrugs struct {
 	Dosage         string  `gorm:"varchar(50);not null;comment:用药指导"`
 	Taboo          string  `gorm:"varchar(50);not null;comment:饮食禁忌"`
 	Price          float32 `gorm:"decimal(10,2);not null;comment:药品价格"`
+	Image          string  `gorm:"varchar(200);comment:药品图片"`
 }
 
 func (MedicalDrugs) TableName() string {

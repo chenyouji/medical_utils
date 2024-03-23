@@ -62,6 +62,8 @@ github.com/aliyun/alibabacloud-dkms-gcs-go-sdk v0.2.2 h1:rWkH6D2XlXb/Y+tNAQROxBz
 github.com/aliyun/alibabacloud-dkms-gcs-go-sdk v0.2.2/go.mod h1:GDtq+Kw+v0fO+j5BrrWiUHbBq7L+hfpzpPfXKOZMFE0=
 github.com/aliyun/alibabacloud-dkms-transfer-go-sdk v0.1.7 h1:olLiPI2iM8Hqq6vKnSxpM3awCrm9/BeOgHpzQkOYnI4=
 github.com/aliyun/alibabacloud-dkms-transfer-go-sdk v0.1.7/go.mod h1:oDg1j4kFxnhgftaiLJABkGeSvuEvSF5Lo6UmRAMruX4=
+github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible h1:8psS8a+wKfiLt1iVDX79F7Y6wUM49Lcha2FMXt4UM8g=
+github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible/go.mod h1:T/Aws4fEfogEE9v+HPhhw+CntffsBHJ8nXQCwKr0/g8=
 github.com/apache/rocketmq-client-go/v2 v2.1.2 h1:yt73olKe5N6894Dbm+ojRf/JPiP0cxfDNNffKwhpJVg=
 github.com/apache/rocketmq-client-go/v2 v2.1.2/go.mod h1:6I6vgxHR3hzrvn+6n/4mrhS+UTulzK/X9LB2Vk1U5gE=
 github.com/apache/thrift v0.12.0/go.mod h1:cp2SuWMxlEZw2r+iP2GNCdIi4C1qmUzdZFSVb+bacwQ=
