@@ -24,7 +24,7 @@ func InitModel(sql *MySQL) *gorm.DB {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = db.AutoMigrate(&MedicalUser{}, &MedicalAddress{}, &MedicalConsult{}, &MedicalDoctor{}, &MedicalRegistration{}, &MedicalDrugs{}, &MedicalDoctorDepartment{}, &MedicalHospital{})
+	err = db.AutoMigrate(&MedicalUser{}, &MedicalAddress{}, &MedicalConsult{}, &MedicalDoctor{}, &MedicalRegistration{}, &MedicalDrugs{}, &MedicalDoctorDepartment{}, &MedicalHospital{}, &MedicalIllness{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -134,4 +134,15 @@ type MedicalConsult struct {
 
 func (MedicalConsult) TableName() string {
 	return "medical_consult"
+}
+
+type MedicalIllness struct {
+	gorm.Model
+	Name               string `gorm:"varchar(50);not null;comment:病种名称"`
+	SymptomDetail      string `gorm:"varchar(300);not null;comment:症状描述"`
+	TreatmentRecommend string `gorm:"varchar(300);not null;comment:治疗建议"`
+}
+
+func (MedicalIllness) TableName() string {
+	return "medical_illness"
 }
