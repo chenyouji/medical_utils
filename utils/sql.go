@@ -93,13 +93,18 @@ type MedicalDoctorDepartment struct {
 	gorm.Model
 	Name string `gorm:"varchar(10);not null;comment:科室"`
 }
+
+func (MedicalDoctorDepartment) TableName() string {
+	return "medical_doctor_department"
+}
+
 type MedicalHospital struct {
 	gorm.Model
 	Name string `gorm:"varchar(12);not null;comment:医院名称"`
 }
 
-func (MedicalDoctorDepartment) TableName() string {
-	return "medical_doctor_department"
+func (MedicalHospital) TableName() string {
+	return "medical_hospital"
 }
 
 type MedicalDrugs struct {
