@@ -76,8 +76,8 @@ func (MedicalRegistration) TableName() string {
 type MedicalDoctor struct {
 	gorm.Model
 	Name         string `gorm:"varchar(10);not null;comment:姓名"`
-	DepartmentId string `gorm:"tinyint(3);not null;comment:科室id"`
-	HospitalId   string `gorm:"tinyint(3);not null;comment:所属医院id"`
+	DepartmentId int32  `gorm:"tinyint(3);not null;comment:科室id"`
+	HospitalId   int32  `gorm:"tinyint(3);not null;comment:所属医院id"`
 	Detail       string `gorm:"varchar(50);not null;comment:描述"`
 	Title        string `gorm:"varchar(10);not null;comment:职称"`
 	Mobile       string `gorm:"char(11);not null;comment:手机号"`
