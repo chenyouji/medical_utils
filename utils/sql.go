@@ -75,13 +75,14 @@ func (MedicalRegistration) TableName() string {
 
 type MedicalDoctor struct {
 	gorm.Model
-	Name       string `gorm:"varchar(10);not null;comment:姓名"`
-	Department string `gorm:"varchar(10);not null;comment:科室"`
-	Hospital   string `gorm:"varchar(10);not null;comment:所属医院"`
-	Detail     string `gorm:"varchar(50);not null;comment:描述"`
-	Title      string `gorm:"varchar(10);not null;comment:职称"`
-	Mobile     string `gorm:"char(11);not null;comment:手机号"`
-	Image      string `gorm:"varchar(200);comment:头像"`
+	Name         string `gorm:"varchar(10);not null;comment:姓名"`
+	DepartmentId string `gorm:"tinyint(3);not null;comment:科室id"`
+	Hospital     string `gorm:"varchar(10);not null;comment:所属医院"`
+	Detail       string `gorm:"varchar(50);not null;comment:描述"`
+	Title        string `gorm:"varchar(10);not null;comment:职称"`
+	Mobile       string `gorm:"char(11);not null;comment:手机号"`
+	Image        string `gorm:"varchar(200);comment:头像"`
+	Adept        string `gorm:"varchar(100);not null;comment:擅长"`
 }
 
 func (MedicalDoctor) TableName() string {
@@ -89,7 +90,14 @@ func (MedicalDoctor) TableName() string {
 }
 
 type MedicalDoctorDepartment struct {
+	gorm.Model
+	Department string `gorm:"varchar(10);not null;comment:科室"`
 }
+
+func (MedicalDoctorDepartment) TableName() string {
+	return "medical_doctor_department"
+}
+
 type MedicalDrugs struct {
 	gorm.Model
 	Name           string  `gorm:"varchar(20);not null;comment:药名"`
