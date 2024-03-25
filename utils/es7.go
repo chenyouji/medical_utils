@@ -147,3 +147,21 @@ func SearchWithMixedFields(indexName string, field1, field2 string, field1Value,
 		Do(ctx)
 	return result, err
 }
+
+// 根据症状、医院、科室、医生名查询医生列表
+func SearchDoctor(indexName, field1, field2, field3, field4, value string) (*elastic.SearchResult, error) {
+	query := elastic.NewBoolQuery().
+		Should(
+			elastic.NewWildcardQuery(field1, "*"+value+"*"),
+			elastic.NewWildcardQuery(field2, "*"+value+"*"),
+			elastic.NewWildcardQuery(field3, "*"+value+"*"),
+			elastic.NewWildcardQuery(field4, "*"+value+"*"),
+		).
+		MinimumShouldMatch("1")
+
+	result, err := esClient.Search().
+		Index(indexName).
+		Query(query).
+		Do(ctx)
+	return result, err
+}
