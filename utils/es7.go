@@ -149,7 +149,7 @@ func SearchWithMixedFields(indexName string, field1, field2 string, field1Value,
 }
 
 // 根据症状、医院、科室、医生名查询医生列表
-func SearchDoctor(indexName, field1, field2, field3, field4, value string) (*elastic.SearchResult, error) {
+func SearchDoctor(indexName, field1, field2, field3, field4, value string, offset, limit int) (*elastic.SearchResult, error) {
 	query := elastic.NewBoolQuery().
 		Should(
 			elastic.NewWildcardQuery(field1, "*"+value+"*"),
@@ -162,6 +162,7 @@ func SearchDoctor(indexName, field1, field2, field3, field4, value string) (*ela
 	result, err := EsClient.Search().
 		Index(indexName).
 		Query(query).
+		From(offset).Size(limit).
 		Do(ctx)
 	return result, err
 }
