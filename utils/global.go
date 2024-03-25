@@ -10,6 +10,8 @@ var Db *gorm.DB
 var esMysqlConfig struct {
 	Es    Elastic `json:"es"`
 	Mysql MySQL   `json:"mysql"`
+	Oss   Oss     `json:"oss"`
+	Redis Redis   `json:"redis"`
 }
 
 func Inits(filepath string) {
@@ -21,4 +23,5 @@ func Inits(filepath string) {
 	_ = json.Unmarshal([]byte(content), &esMysqlConfig)
 	InitEs(&esMysqlConfig.Es)
 	Db = InitModel(&esMysqlConfig.Mysql)
+	InitRedis(&esMysqlConfig.Redis)
 }

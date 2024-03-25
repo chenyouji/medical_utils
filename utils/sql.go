@@ -33,14 +33,14 @@ func InitModel(sql *MySQL) *gorm.DB {
 
 type MedicalUser struct {
 	gorm.Model
-	Username string `gorm:"varchar(20);not null;comment:用户名"`
-	Password string `gorm:"varchar(50);not null;comment:密码"`
-	Name     string `gorm:"varchar(15);not null;comment:姓名"`
-	IdCard   string `gorm:"char(18);not null;comment:身份证号码"`
-	Mobile   string `gorm:"char(11);not null;comment:手机号"`
-	Age      int32  `gorm:"tinyint(3);not null;comment:年龄"`
-	Sex      int32  `gorm:"tinyint(1);not null;comment:性别（1为男性，0为女性）"`
-	Image    string `gorm:"varchar(200);comment:头像"`
+	Username string `gorm:"type:varchar(20);not null;comment:用户名"`
+	Password string `gorm:"type:varchar(50);not null;comment:密码"`
+	Name     string `gorm:"type:varchar(15);not null;comment:姓名"`
+	IdCard   string `gorm:"type:char(18);not null;comment:身份证号码"`
+	Mobile   string `gorm:"type:char(11);not null;comment:手机号"`
+	Age      int32  `gorm:"type:tinyint(3);not null;comment:年龄"`
+	Sex      int32  `gorm:"type:tinyint(1);not null;comment:性别（1为男性，0为女性）"`
+	Image    string `gorm:"type:varchar(200);comment:头像"`
 }
 
 func (MedicalUser) TableName() string {
@@ -49,10 +49,10 @@ func (MedicalUser) TableName() string {
 
 type MedicalAddress struct {
 	gorm.Model
-	UserID    int32  `gorm:"int;not null;comment:用户id"`
-	Address   string `gorm:"varchar(50);comment:地址"`
-	Name      string `gorm:"varchar(10);comment:收件人"`
-	IsDefault int32  `gorm:"tinyint(1);not null;comment:是否默认选中1选中0不选中"`
+	UserID    int32  `gorm:"type:int;not null;comment:用户id"`
+	Address   string `gorm:"type:varchar(50);comment:地址"`
+	Name      string `gorm:"type:varchar(10);comment:收件人"`
+	IsDefault int32  `gorm:"type:tinyint(1);not null;comment:是否默认选中1选中0不选中"`
 }
 
 func (MedicalAddress) TableName() string {
@@ -61,12 +61,12 @@ func (MedicalAddress) TableName() string {
 
 type MedicalRegistration struct {
 	gorm.Model
-	UserID         int32   `gorm:"int;not null;comment:用户id"`
-	DoctorID       int32   `gorm:"int;not null;comment:医生id"`
-	Hospital       string  `gorm:"varchar(20);not null;comment:医院名称"`
-	Amount         float32 `gorm:"decimal(10,2);not null;comment:挂号费"`
-	PayType        int32   `gorm:"tinyint(1);not null;comment:支付方式"`
-	RegistrationSn string  `gorm:"varchar(50);not null;comment:挂号号码"`
+	UserID         int32   `gorm:"type:int;not null;comment:用户id"`
+	DoctorID       int32   `gorm:"type:int;not null;comment:医生id"`
+	Hospital       string  `gorm:"type:varchar(20);not null;comment:医院名称"`
+	Amount         float32 `gorm:"type:decimal(10,2);not null;comment:挂号费"`
+	PayType        int32   `gorm:"type:tinyint(1);not null;comment:支付方式"`
+	RegistrationSn string  `gorm:"type:varchar(50);not null;comment:挂号号码"`
 }
 
 func (MedicalRegistration) TableName() string {
@@ -75,14 +75,14 @@ func (MedicalRegistration) TableName() string {
 
 type MedicalDoctor struct {
 	gorm.Model
-	Name         string `gorm:"varchar(10);not null;comment:姓名"`
-	DepartmentId int32  `gorm:"tinyint(3);not null;comment:科室id"`
-	HospitalId   int32  `gorm:"tinyint(3);not null;comment:所属医院id"`
-	Detail       string `gorm:"varchar(50);not null;comment:描述"`
-	Title        string `gorm:"varchar(10);not null;comment:职称"`
-	Mobile       string `gorm:"char(11);not null;comment:手机号"`
-	Image        string `gorm:"varchar(200);comment:头像"`
-	Adept        string `gorm:"varchar(100);not null;comment:擅长"`
+	Name         string `gorm:"type:varchar(10);not null;comment:姓名"`
+	DepartmentId int32  `gorm:"type:tinyint(3);not null;comment:科室id"`
+	HospitalId   int32  `gorm:"type:tinyint(3);not null;comment:所属医院id"`
+	Detail       string `gorm:"type:varchar(50);not null;comment:描述"`
+	Title        string `gorm:"type:varchar(10);not null;comment:职称"`
+	Mobile       string `gorm:"type:char(11);not null;comment:手机号"`
+	Image        string `gorm:"type:varchar(200);comment:头像"`
+	Adept        string `gorm:"type:varchar(100);not null;comment:擅长"`
 }
 
 func (MedicalDoctor) TableName() string {
@@ -91,7 +91,7 @@ func (MedicalDoctor) TableName() string {
 
 type MedicalDoctorDepartment struct {
 	gorm.Model
-	Name string `gorm:"varchar(10);not null;comment:科室"`
+	Name string `gorm:"type:varchar(10);not null;comment:科室"`
 }
 
 func (MedicalDoctorDepartment) TableName() string {
@@ -100,7 +100,7 @@ func (MedicalDoctorDepartment) TableName() string {
 
 type MedicalHospital struct {
 	gorm.Model
-	Name string `gorm:"varchar(12);not null;comment:医院名称"`
+	Name string `gorm:"type:varchar(12);not null;comment:医院名称"`
 }
 
 func (MedicalHospital) TableName() string {
@@ -109,15 +109,15 @@ func (MedicalHospital) TableName() string {
 
 type MedicalDrugs struct {
 	gorm.Model
-	Name           string  `gorm:"varchar(20);not null;comment:药名"`
-	Detail         string  `gorm:"varchar(150);not null;comment:药品描述"`
-	DrugType       int32   `gorm:"tinyint(1);not null;comment:药品类型(1，西药，2，中药)"`
-	IsPrescription int32   `gorm:"tinyint(1);not null;comment:是否是处方药(1为RX,2为OTC)"`
-	InsDrugs       int32   `gorm:"tinyint(1);not null;comment:是否是医保药(1为是,0为否)"`
-	Dosage         string  `gorm:"varchar(50);not null;comment:用药指导"`
-	Taboo          string  `gorm:"varchar(50);not null;comment:饮食禁忌"`
-	Price          float32 `gorm:"decimal(10,2);not null;comment:药品价格"`
-	Image          string  `gorm:"varchar(200);comment:药品图片"`
+	Name           string  `gorm:"type:varchar(20);not null;comment:药名"`
+	Detail         string  `gorm:"type:varchar(150);not null;comment:药品描述"`
+	DrugType       int32   `gorm:"type:tinyint(1);not null;comment:药品类型(1，西药，2，中药)"`
+	IsPrescription int32   `gorm:"type:tinyint(1);not null;comment:是否是处方药(1为RX,2为OTC)"`
+	InsDrugs       int32   `gorm:"type:tinyint(1);not null;comment:是否是医保药(1为是,0为否)"`
+	Dosage         string  `gorm:"type:varchar(50);not null;comment:用药指导"`
+	Taboo          string  `gorm:"type:varchar(50);not null;comment:饮食禁忌"`
+	Price          float32 `gorm:"type:decimal(10,2);not null;comment:药品价格"`
+	Image          string  `gorm:"type:varchar(200);comment:药品图片"`
 }
 
 func (MedicalDrugs) TableName() string {
@@ -126,10 +126,10 @@ func (MedicalDrugs) TableName() string {
 
 type MedicalConsult struct {
 	gorm.Model
-	UserID   int32  `gorm:"int;not null;comment:用户id"`
-	DoctorID int32  `gorm:"int;not null;comment:医生id"`
-	SendType int32  `gorm:"tinyint(1);not null;comment:消息发送类型(1,医生发送给用户，2,用户发送给医生)"`
-	Message  string `gorm:"varchar(50);not null;comment:消息内容"`
+	UserID   int32  `gorm:"type:int;not null;comment:用户id"`
+	DoctorID int32  `gorm:"type:int;not null;comment:医生id"`
+	SendType int32  `gorm:"type:tinyint(1);not null;comment:消息发送类型(1,医生发送给用户，2,用户发送给医生)"`
+	Message  string `gorm:"type:varchar(50);not null;comment:消息内容"`
 }
 
 func (MedicalConsult) TableName() string {
@@ -138,9 +138,9 @@ func (MedicalConsult) TableName() string {
 
 type MedicalIllness struct {
 	gorm.Model
-	Name               string `gorm:"varchar(50);not null;comment:病种名称"`
-	SymptomDetail      string `gorm:"varchar(300);not null;comment:症状描述"`
-	TreatmentRecommend string `gorm:"varchar(300);not null;comment:治疗建议"`
+	Name               string `gorm:"type:varchar(50);not null;comment:病种名称"`
+	SymptomDetail      string `gorm:"type:varchar(300);not null;comment:症状描述"`
+	TreatmentRecommend string `gorm:"type:varchar(300);not null;comment:治疗建议"`
 }
 
 func (MedicalIllness) TableName() string {
