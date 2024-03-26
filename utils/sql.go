@@ -179,3 +179,12 @@ type MedicalFollow struct {
 func (MedicalFollow) TableName() string {
 	return "medical_follow"
 }
+
+type MedicalCrowd struct {
+	gorm.Model
+	Name string `gorm:"type:varchar(5);comment:适应人群"`
+}
+
+func (MedicalCrowd) TableName() string {
+	return "medical_crowd"
+}
