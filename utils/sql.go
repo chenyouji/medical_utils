@@ -8,6 +8,8 @@ import (
 	"log"
 )
 
+var Db *gorm.DB
+
 type MySQL struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
