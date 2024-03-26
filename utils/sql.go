@@ -146,3 +146,31 @@ type MedicalIllness struct {
 func (MedicalIllness) TableName() string {
 	return "medical_illness"
 }
+
+type MedicalEncyclopedia struct {
+	gorm.Model
+	DoctorId   int32  `gorm:"type:int;not null;comment:医生id"`
+	Name       string `gorm:"type:varchar(30);not null;comment:疾病名称"`
+	Overview   string `gorm:"type:text;not null;comment:概述"`
+	Symptom    string `gorm:"type:varchar(200);not null;comment:症状"`
+	Etiology   string `gorm:"type:varchar(200);comment:病因"`
+	FindDoctor string `gorm:"type:varchar(200);comment:就医"`
+	Treatment  string `gorm:"type:varchar(200);comment:治疗"`
+	Daily      string `gorm:"type:varchar(200);comment:日常"`
+	Prevent    string `gorm:"type:varchar(200);comment:预防"`
+}
+
+func (MedicalEncyclopedia) TableName() string {
+	return "medical_encyclopedia"
+}
+
+type MedicalFollow struct {
+	gorm.Model
+	Uid      int32 `gorm:"type:int;not null;comment:用户id"`
+	DoctorId int32 `gorm:"type:int;not null;comment:医生id"`
+	Status   int32 `gorm:"type:tinyint(1);not null;comment:1已关注2未关注"`
+}
+
+func (MedicalFollow) TableName() string {
+	return "medical_follow"
+}
