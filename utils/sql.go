@@ -149,15 +149,16 @@ func (MedicalIllness) TableName() string {
 
 type MedicalEncyclopedia struct {
 	gorm.Model
-	DoctorId   int32  `gorm:"type:int;not null;comment:医生id"`
-	Name       string `gorm:"type:varchar(30);not null;comment:疾病名称"`
-	Overview   string `gorm:"type:text;not null;comment:概述"`
-	Symptom    string `gorm:"type:varchar(200);not null;comment:症状"`
-	Etiology   string `gorm:"type:varchar(200);comment:病因"`
-	FindDoctor string `gorm:"type:varchar(200);comment:就医"`
-	Treatment  string `gorm:"type:varchar(200);comment:治疗"`
-	Daily      string `gorm:"type:varchar(200);comment:日常"`
-	Prevent    string `gorm:"type:varchar(200);comment:预防"`
+	DoctorId     int32  `gorm:"type:int;not null;comment:医生id"`
+	DepartmentId int32  `gorm:"type:tinyint(3);not null;comment:科室id"`
+	Name         string `gorm:"type:varchar(30);not null;comment:疾病名称"`
+	Overview     string `gorm:"type:text;not null;comment:概述"`
+	Symptom      string `gorm:"type:varchar(200);not null;comment:症状"`
+	Etiology     string `gorm:"type:varchar(200);comment:病因"`
+	FindDoctor   string `gorm:"type:varchar(200);comment:就医"`
+	Treatment    string `gorm:"type:varchar(200);comment:治疗"`
+	Daily        string `gorm:"type:varchar(200);comment:日常"`
+	Prevent      string `gorm:"type:varchar(200);comment:预防"`
 }
 
 func (MedicalEncyclopedia) TableName() string {
