@@ -113,7 +113,7 @@ type MedicalDrugs struct {
 	Detail         string  `gorm:"type:varchar(150);not null;comment:药品描述"`
 	DrugType       int32   `gorm:"type:tinyint(1);not null;comment:药品类型(1，西药，2，中药)"`
 	IsPrescription int32   `gorm:"type:tinyint(1);not null;comment:是否是处方药(1为RX,2为OTC)"`
-	InsDrugs       int32   `gorm:"type:tinyint(1);not null;comment:是否是医保药(1为是,0为否)"`
+	InsDrugs       int32   `gorm:"type:tinyint(1);not null;comment:是否是医保药(1为是,2为否)"`
 	Dosage         string  `gorm:"type:varchar(50);not null;comment:用药指导"`
 	Taboo          string  `gorm:"type:varchar(50);not null;comment:饮食禁忌"`
 	Price          float32 `gorm:"type:decimal(10,2);not null;comment:药品价格"`
