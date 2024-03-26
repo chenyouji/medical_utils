@@ -27,7 +27,7 @@ func InitModel(sql *MySQL) *gorm.DB {
 		log.Fatal(err)
 	}
 	//err = db.AutoMigrate(&MedicalUser{}, &MedicalAddress{}, &MedicalConsult{}, &MedicalDoctor{}, &MedicalRegistration{}, &MedicalDrugs{}, &MedicalDoctorDepartment{}, &MedicalHospital{}, &MedicalIllness{})
-	err = db.AutoMigrate(&MedicalEncyclopedia{}, &MedicalFollow{})
+	err = db.AutoMigrate(&MedicalEncyclopedia{}, &MedicalFollow{}, &MedicalCrowd{})
 	if err != nil {
 		log.Fatal(err)
 	}
