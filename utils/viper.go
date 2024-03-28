@@ -4,16 +4,16 @@ import (
 	"github.com/spf13/viper"
 )
 
-var config struct {
+type Config struct {
 	Nacos Nacos
 }
 
-func InitViper(filepath string) {
+func InitViper(filepath string, c *Config) {
 	v := viper.New()
 	v.SetConfigFile(filepath)
 	err := v.ReadInConfig()
 	if err != nil {
 		panic(err)
 	}
-	_ = v.Unmarshal(&config)
+	_ = v.Unmarshal(&c)
 }
