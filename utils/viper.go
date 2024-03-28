@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var Config struct {
+var config struct {
 	Nacos Nacos
 }
 
@@ -15,5 +15,5 @@ func InitViper(filepath string) {
 	if err != nil {
 		panic(err)
 	}
-	_ = v.Unmarshal(&Config)
+	_ = v.Unmarshal(&config)
 }

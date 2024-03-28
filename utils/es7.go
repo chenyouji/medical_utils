@@ -14,35 +14,33 @@ type Elastic struct {
 }
 
 var (
-	EsClient *elastic.Client
+	esClient *elastic.Client
 	ctx      = context.Background()
 )
 
 // 实例化es客户端
-func InitEs(e *Elastic) {
+func InitEs(e *Elastic) (*elastic.Client, error) {
 	var err error
-	EsClient, err = elastic.NewClient(elastic.SetURL(fmt.Sprintf("http://%s:%d", e.Host, e.Port)), elastic.SetSniff(false))
-	if err != nil {
-		panic(err)
-	}
+	esClient, err = elastic.NewClient(elastic.SetURL(fmt.Sprintf("http://%s:%d", e.Host, e.Port)), elastic.SetSniff(false))
+	return esClient, err
 }
 
 // 判断索引是否存在
 func ExistIndex(indexName string) (bool, error) {
-	exists, err := EsClient.IndexExists(indexName).Do(ctx)
+	exists, err := esClient.IndexExists(indexName).Do(ctx)
 	return exists, err
 }
 
 // 创建索引
 // indexName 索引名称,mapping 映射的结构体
 func CreateIndex(indexName string, mapping string) (*elastic.IndicesCreateResult, error) {
-	createIndex, err := EsClient.CreateIndex(indexName).BodyString(mapping).Do(ctx)
+	createIndex, err := esClient.CreateIndex(indexName).BodyString(mapping).Do(ctx)
 	return createIndex, err
 }
 
 // 向索引写入单条数据
 func AddDocToIndex(indexName string, id int, doc interface{}) error {
-	_, err := EsClient.Index().
+	_, err := esClient.Index().
 		Index(indexName).
 		Id(strconv.Itoa(id)).
 		BodyJson(doc).
@@ -52,7 +50,7 @@ func AddDocToIndex(indexName string, id int, doc interface{}) error {
 
 // 根据文档id查询数据
 func SearchDocByDocID(indexName string, id int) (*elastic.GetResult, error) {
-	result, err := EsClient.Get().
+	result, err := esClient.Get().
 		Index(indexName).
 		Id(strconv.Itoa(id)).
 		Do(ctx)
@@ -62,7 +60,7 @@ func SearchDocByDocID(indexName string, id int) (*elastic.GetResult, error) {
 // 精确查询,term是精确查询，字段类型keyword 不能是text
 func TermQuery(indexName, field, value string, offset, limit int) (*elastic.SearchResult, error) {
 	termQuery := elastic.NewTermQuery(field, value)
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(termQuery).
 		From(offset).Size(limit).
@@ -73,7 +71,7 @@ func TermQuery(indexName, field, value string, offset, limit int) (*elastic.Sear
 
 // 通过文档ID更改信息
 func UpdateByDocId(indexName string, id int, doc interface{}) error {
-	_, err := EsClient.Update().
+	_, err := esClient.Update().
 		Index(indexName).
 		Id(strconv.Itoa(id)).
 		Doc(doc).
@@ -85,7 +83,7 @@ func UpdateByDocId(indexName string, id int, doc interface{}) error {
 // 词项多条件精确查询
 func TermsQuery(indexName, field string, offset, limit int, values ...interface{}) (*elastic.SearchResult, error) {
 	termQuery := elastic.NewTermsQuery(field, values...)
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(termQuery).
 		From(offset).Size(limit).
@@ -97,7 +95,7 @@ func TermsQuery(indexName, field string, offset, limit int, values ...interface{
 // 词项的区间查询
 func RangeQuery(indexName, field string, offset, limit int, gte, lte interface{}) (*elastic.SearchResult, error) {
 	rangeQuery := elastic.NewRangeQuery(field).Gte(gte).Lte(lte)
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(rangeQuery).
 		From(offset).Size(limit).
@@ -112,7 +110,7 @@ func SearchWithHighlight(indexName, field, msg string, offset, limit int) (*elas
 	highlight := elastic.NewHighlight().Field(field)
 	highlight.PreTags("<span color='red'>")
 	highlight.PostTags("</span>")
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(query).
 		Highlight(highlight).
@@ -127,7 +125,7 @@ func SearchWithBothFields(indexName string, field1, field2 string, field1Value, 
 	termQuery1 := elastic.NewTermQuery(field1, field1Value)
 	termQuery2 := elastic.NewTermQuery(field2, field2Value)
 	boolQuery := elastic.NewBoolQuery().Must(termQuery1, termQuery2)
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(boolQuery).
 		Do(ctx)
@@ -141,7 +139,7 @@ func SearchWithMixedFields(indexName string, field1, field2 string, field1Value,
 	//可以不匹配
 	notMatchQuery2 := elastic.NewBoolQuery().MustNot(termQuery2)
 	boolQuery := elastic.NewBoolQuery().Must(termQuery1).Should(termQuery2).Should(notMatchQuery2)
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(boolQuery).
 		Do(ctx)
@@ -159,7 +157,7 @@ func SearchDoctor(indexName, field1, field2, field3, field4, value string, offse
 		).
 		MinimumShouldMatch("1")
 
-	result, err := EsClient.Search().
+	result, err := esClient.Search().
 		Index(indexName).
 		Query(query).
 		From(offset).Size(limit).

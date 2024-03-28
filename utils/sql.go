@@ -8,8 +8,6 @@ import (
 	"log"
 )
 
-var Db *gorm.DB
-
 type MySQL struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
@@ -26,12 +24,13 @@ func InitModel(sql *MySQL) *gorm.DB {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//err = db.AutoMigrate(&MedicalUser{}, &MedicalAddress{}, &MedicalConsult{}, &MedicalDoctor{}, &MedicalRegistration{}, &MedicalDrugs{}, &MedicalDoctorDepartment{}, &MedicalHospital{}, &MedicalIllness{})
-	err = db.AutoMigrate(&MedicalEncyclopedia{}, &MedicalFollow{}, &MedicalCrowd{})
-	if err != nil {
-		log.Fatal(err)
-	}
 	return db
+}
+func AutoMigrate(db *gorm.DB) {
+	err := db.AutoMigrate(&MedicalEncyclopedia{}, &MedicalFollow{}, &MedicalCrowd{}, &MedicalUser{}, &MedicalAddress{}, &MedicalConsult{}, &MedicalDoctor{}, &MedicalRegistration{}, &MedicalDrugs{}, &MedicalDoctorDepartment{}, &MedicalHospital{}, &MedicalIllness{})
+	if err != nil {
+		log.Fatal("迁移文件失败,错误为:", err)
+	}
 }
 
 type MedicalUser struct {

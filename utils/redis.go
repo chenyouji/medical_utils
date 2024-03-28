@@ -13,15 +13,14 @@ type Redis struct {
 	Port int    `json:"port"`
 }
 
-var RedisClient *redis.Client
-
-func InitRedis(r *Redis) {
-	RedisClient = redis.NewClient(&redis.Options{
+func InitRedis(r *Redis) *redis.Client {
+	redisClient := redis.NewClient(&redis.Options{
 		Addr: fmt.Sprintf("%s:%d", r.Host, r.Port),
 	})
+	return redisClient
 }
-func InitRedisRedsync() *redsync.Redsync {
-	pool := goredis.NewPool(RedisClient)
+func InitRedisRedsync(redisClient *redis.Client) *redsync.Redsync {
+	pool := goredis.NewPool(redisClient)
 	rs := redsync.New(pool)
 	return rs
 }
