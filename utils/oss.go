@@ -29,7 +29,7 @@ func UploadOss(filename string, fd multipart.File, o *Oss) (string, error) {
 	}
 
 	now := time.Now()
-	filepath := fmt.Sprintf("%d%d/", now.Year(), now.Month())
+	filepath := fmt.Sprintf("%d年%d月/", now.Year(), now.Month())
 
 	// 将文件流上传至exampledir目录下的exampleobject.txt文件。
 	err = bucket.PutObject("images/"+filepath, fd)

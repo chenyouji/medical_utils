@@ -11,6 +11,8 @@ type Elastic struct {
 	Host      string `json:"host"`
 	Port      int    `json:"port"`
 	IndexName string `json:"index_name"`
+	User      string `json:"user"`
+	Password  string `json:"password"`
 }
 
 var (
@@ -21,7 +23,7 @@ var (
 // 实例化es客户端
 func InitEs(e *Elastic) (*elastic.Client, error) {
 	var err error
-	esClient, err = elastic.NewClient(elastic.SetURL(fmt.Sprintf("http://%s:%d", e.Host, e.Port)), elastic.SetSniff(false))
+	esClient, err = elastic.NewClient(elastic.SetURL(fmt.Sprintf("http://%s:%d", e.Host, e.Port)), elastic.SetSniff(false), elastic.SetBasicAuth(e.User, e.Password))
 	return esClient, err
 }
 

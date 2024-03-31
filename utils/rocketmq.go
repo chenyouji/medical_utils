@@ -10,12 +10,17 @@ import (
 	"os"
 )
 
+type RocketMq struct {
+	Host string `json:"host"`
+	Port int    `json:"port"`
+}
+
 var p rocketmq.Producer
 
 // 初始化生产消息
-func InitProducer() {
+func InitProducer(r *RocketMq) {
 	p, _ = rocketmq.NewProducer(
-		producer.WithNsResolver(primitive.NewPassthroughResolver([]string{"127.0.0.1:9876"})),
+		producer.WithNsResolver(primitive.NewPassthroughResolver([]string{fmt.Sprintf("%s:%d", r.Host, r.Port)})),
 		producer.WithRetry(2),
 	)
 	err := p.Start()
@@ -35,10 +40,10 @@ func Producer(topic string, message []byte) error {
 }
 
 // 初始化消费消息
-func InitConsumer(topic, group string) {
+func InitConsumer(topic, group string, r *RocketMq) {
 	c, _ := rocketmq.NewPushConsumer(
 		consumer.WithGroupName(group),
-		consumer.WithNsResolver(primitive.NewPassthroughResolver([]string{"127.0.0.1:9876"})),
+		consumer.WithNsResolver(primitive.NewPassthroughResolver([]string{fmt.Sprintf("%s:%d", r.Host, r.Port)})),
 	)
 	err := c.Subscribe(topic, consumer.MessageSelector{}, Consumer)
 	if err != nil {
