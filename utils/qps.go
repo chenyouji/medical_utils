@@ -18,7 +18,7 @@ func InitQps() {
 			Resource:               "some-test", // 资源名称
 			TokenCalculateStrategy: flow.Direct, // 令牌计算策略
 			ControlBehavior:        flow.Reject, // 控制行为：直接拒绝
-			Threshold:              1,           // 每秒钟响应1次
+			Threshold:              10000,       // 每秒钟响应10000次
 			StatIntervalInMs:       1000,        // 统计间隔时间：每秒钟统计一次
 		},
 	})

@@ -32,6 +32,12 @@ func AutoMigrate(db *gorm.DB) {
 		log.Fatal("迁移文件失败,错误为:", err)
 	}
 }
+func AutoMigrate2(db *gorm.DB, mysqlStruct struct{}) {
+	err := db.AutoMigrate(&mysqlStruct)
+	if err != nil {
+		log.Fatal("迁移文件失败,错误为:", err)
+	}
+}
 
 type MedicalUser struct {
 	gorm.Model
@@ -43,6 +49,7 @@ type MedicalUser struct {
 	Age      int32  `gorm:"type:tinyint(3);not null;comment:年龄"`
 	Sex      int32  `gorm:"type:tinyint(1);not null;comment:性别（1为男性，0为女性）"`
 	Image    string `gorm:"type:varchar(200);comment:头像"`
+	OpenId   string `gorm:"type:varchar(50);comment:QQ的open_id"`
 }
 
 func (MedicalUser) TableName() string {

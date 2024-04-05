@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a40270a3-6f67-4d55-96a3-5021e4479535" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/es7.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/es7.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/oss.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/oss.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/rocketmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/rocketmq.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/qps.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/qps.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/sql.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
